@@ -101,7 +101,7 @@ Don't be discouraged if you missed the first ten or couldn't beat our score. At 
     
 ### ❓ Are you interested in how we did it?
 
-If we can dominate the leaderboard from a laptop, imagine the stability and raw power we can unleash on your datacenter.
+Imagine the stability and raw power we can unleash on your datacenter.
 [Technical Details](https://harikube.info/features/performance/)
 
 ## 🙏 Share Feedback and Report Issues

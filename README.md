@@ -69,7 +69,7 @@ To ensure valid and comparable results, all participants must adhere to the foll
    - Summary of k6 benchmark execution, example location: `results/${USER}/1771941557_20_sum.json`
    - Collected benchmark data, example location: `results/${USER}/1771941557_20.json`
    - Updated `Current Leaderboard` in `README.md`
-   - If you have the highest score; update `Leader Benchmark Details` in `README.md` based on the example.
+   - If you have the highest score; update `Leader Benchmark Details` in `README.md` based on the example
 
 ### 🕵️ Benchmark Details
 

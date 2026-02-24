@@ -4,9 +4,6 @@ import { check } from 'k6';
 import { uuidv4 } from 'https://jslib.k6.io/k6-utils/1.4.0/index.js';
 
 export const options = {
-  vus: __ENV.K6V,
-  iterations: __ENV.K6I,
-  duration: __ENV.K6T,
   tlsAuth: [
     {
       cert: __ENV.USER_CRT,
@@ -65,7 +62,6 @@ function postRequest(url, payload, created) {
     });
 
     if (!checkRes) {
-      console.log(url, res.body);
       reject();
     } else {
       resolve();
@@ -82,7 +78,6 @@ function getRequest(kind, version, name) {
     });
 
     if (!checkRes) {
-      console.log(url, res.body);
       reject();
     } else {
       resolve();

@@ -48,7 +48,7 @@ To ensure valid and comparable results, all participants must adhere to the foll
 
  - **Discussion Protocol**: Upon completion of the challenge, all winners (who beat our score) will be invited to a friendly discussion regarding the results, architectural insights, and the underlying optimization strategies. This ensures a high-level technical exchange within a vetted peer group.
  - **RBAC Policy Enforcement**: Role-Based Access Control must remain enabled and fully functional. Performance gains achieved by bypassing security layers are disqualified.
- - **Feature Parity**: All core Kubernetes features, including Admission Controllers and standard API validation, must be active. No "stripping" of the environment is permitted.
+ - **Feature Parity**: All core Kubernetes features, including AMission Controllers and standard API validation, must be active. No "stripping" of the environment is permitted.
  - **No Shortcuts**: Any modification to the core that compromises data consistency will result in an invalid run.
  - **Zero Tolerance for Instability**: Database or Kubernetes crash lead to immediate disqualification.
 
@@ -62,8 +62,14 @@ To ensure valid and comparable results, all participants must adhere to the foll
 ### 🛠️ Getting Started
 
  - **Deployment**: Bring your own Kubernetes.
- - **Benchmarking**: Execute our [k6 test](/k6_custom_resource_6%20read_write.js) against on your cluster.
- - **Create a PR**: Share your results via Pull-Request on the challenge repository (check example PR).
+ - **Benchmarking**: Execute our [k6 test](k6_custom_resource_6_read_write.js) against on your cluster.
+   - Run `make` command for details.
+ - **Create a PR**: Share your results via Pull-Request on the challenge repository. The PR must contains:
+   - The data is collected under `results/${USER}` directory
+   - Summary of k6 benchmark execution, example location: `results/${USER}/1771941557_20_sum.json`
+   - Collected benchmark data, example location: `results/${USER}/1771941557_20.json`
+   - Updated `Current Leaderboard` in `README.md`
+   - If you have the highest score; update `Leader Benchmark Details` in `README.md` based on the example.
 
 ### 🕵️ Benchmark Details
 
@@ -85,18 +91,18 @@ To ensure valid and comparable results, all participants must adhere to the foll
 > Initial baseline set on a Laptop; awaiting a challenge to scale up, give me reason to bring my beasts!
 
 ```
-    checks_total.......: 429180  119.106435/s
-    checks_succeeded...: 100.00% 429180 out of 429180
-    checks_failed......: 0.00%   0 out of 429180
+checks_total.......: 429180  119.106435/s
+checks_succeeded...: 100.00% 429180 out of 429180
+checks_failed......: 0.00%   0 out of 429180
 
-    ✓ Status is 201
-    ✓ Status is 200
+✓ Status is 201
+✓ Status is 200
 
-    HTTP
-    http_req_duration..............: avg=167.17ms min=7.75ms   med=71.06ms max=3.71s  p(90)=398ms p(95)=543.76ms
-      { expected_response:true }...: avg=167.17ms min=7.75ms   med=71.06ms max=3.71s  p(90)=398ms p(95)=543.76ms
-    http_req_failed................: 0.00%  0 out of 429180
-    http_reqs......................: 429180 119.106435/s
+HTTP
+http_req_duration..............: avg=167.17ms min=7.75ms   med=71.06ms max=3.71s  p(90)=398ms p(95)=543.76ms
+  { expected_response:true }...: avg=167.17ms min=7.75ms   med=71.06ms max=3.71s  p(90)=398ms p(95)=543.76ms
+http_req_failed................: 0.00%  0 out of 429180
+http_reqs......................: 429180 119.106435/s
 ```
     
 ### ❓ Are you interested in how we did it?

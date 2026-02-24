@@ -37,7 +37,7 @@ To ensure valid and comparable results, all participants must adhere to the foll
 
  - Winners are responsible for any local taxes or customs duties related to their prizes.
  - HariKube reserves the right to disqualify any submission that violates the spirit of the challenge. Our decision is final and non-negotiable.
- - By submitting a PR, you consent to the public display of your GitHub username on the leaderboard. Mailing addresses for prizes will be handled privately and will not be shared with third parties.
+ - By submitting a PR, you consent to the public display of your GitHub username on the leaderboard. Personal information for prizes will be handled temporary and will not be shared with third parties.
  - Legal Disclaimer: This is a skill-based challenge. Participation is free. By submitting your results, you acknowledge that the final validation of any score is subject to the Technical Discussion Protocol to ensure compliance with the rules.
    
 ### 🛠️ Getting Started

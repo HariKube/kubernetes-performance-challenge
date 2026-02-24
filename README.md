@@ -66,11 +66,11 @@ The Design:
 
 ## 🎖️ The "First Ten" Grant
 
-The first 10 participants to submit a valid benchmark report (regardless of their final ranking) will receive a exclusive one-year HariKube Basic Edition License.
+The first 10 participants to submit a valid benchmark report (regardless of their final ranking) will receive a exclusive one-year HariKube [Pro Edition](https://harikube.info/editions/) Edition License.
 
 ## 🎲 The "Second Chance" Draw
 
-Don't be discouraged if you missed the first ten or couldn't beat our score. At the conclusion of the challenge, one additional HariKube Basic Edition License will be raffled off among all participants who submitted a valid report but haven't won through the other categories.
+Don't be discouraged if you missed the first ten or couldn't beat our score. At the conclusion of the challenge, one additional HariKube [Pro Edition](https://harikube.info/editions/) License will be raffled off among all participants who submitted a valid report but haven't won through the other categories.
 
 # ⚡ Current Leaderboard
 

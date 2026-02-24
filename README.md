@@ -76,7 +76,7 @@ To ensure valid and comparable results, all participants must adhere to the foll
 
 | score | participant | checks_total | checks_succeeded | http_reqs/s | http_req_duration.avg | specs |
 | - | - | - | - | - | - | - |
-| **1059*** | [HariKube](https://github.com/orgs/HariKube) | 429180 | 100.00% | 119.106435/s | 167.17ms | Ultra 7 165H 18 Core 4GB |
+| **1059*** | [HariKube](https://github.com/orgs/HariKube) | 429180 | 100.00% | 119.106435/s | 167.17ms | 1x Ultra 7 165H 18 Core 4GB |
 
 > \* Target Score To Beat
 

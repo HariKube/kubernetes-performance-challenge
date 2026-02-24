@@ -15,6 +15,8 @@ Think we're exaggerating? Prove us wrong!
 
 Participants are invited to execute standardized performance tests against the Kubernetes to measure latency, object reconciliation speed, and system stability.
 
+> Participation is free and requires no purchase.
+
 ### Score calculation
 
 `floor(checks_total / (http_req_duration.med*0.2 + http_req_duration.p90*0.3 + http_req_duration.p95*0.5) * (1 - checks_failed / checks_total))`
@@ -33,6 +35,11 @@ To ensure valid and comparable results, all participants must adhere to the foll
 
 > **Integrity & Honor**: We are aware that benchmarks can be manipulated, and no amount of technical restriction can fully prevent dedicated cheating. However, this challenge is a matter of professional honor. We are not fools - any discrepancies will immediately surface during the discussion. Let’s not ruin the collective experience for 15 minutes of fame; if you can’t beat the baseline honestly, use the opportunity to learn how to improve.
 
+ - Winners are responsible for any local taxes or customs duties related to their prizes.
+ - HariKube reserves the right to disqualify any submission that violates the spirit of the challenge. Our decision is final and non-negotiable.
+ - By submitting a PR, you consent to the public display of your GitHub username on the leaderboard. Mailing addresses for prizes will be handled privately and will not be shared with third parties.
+ - Legal Disclaimer: This is a skill-based challenge. Participation is free. By submitting your results, you acknowledge that the final validation of any score is subject to the Technical Discussion Protocol to ensure compliance with the rules.
+   
 ### 🛠️ Getting Started
 
  - **Deployment**: Bring your own Kubernetes.

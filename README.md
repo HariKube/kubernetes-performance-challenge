@@ -38,7 +38,7 @@ Don't be discouraged if you missed the first ten or couldn't beat our score. At 
 
 ### Score calculation
 
-`floor(checks_total / (http_req_duration.med*0.2 + http_req_duration.p90*0.3 + http_req_duration.p95*0.5) * pow(1 - checks_failed / checks_total, 2))`
+`floor(checks_total / (http_req_duration.med*0.2 + http_req_duration.p90*0.3 + http_req_duration.p95*0.5) * pow(1 - checks_failed / checks_total, 7))`
 
 > http_req_duration counted in ms
 

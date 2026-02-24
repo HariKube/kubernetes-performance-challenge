@@ -4,7 +4,7 @@ This repository contains the benchmarking framework and entry point for the Kube
 
 We were interested in how far we can go with Kubernetes. While it can scale up applications to the space (beyond the clouds 😜), Kubernetes itself fails to scale gracefully. Or maybe do?
 
-Think we're exaggerating? Prove us wrong!
+**Think we're exaggerating? Prove us wrong!**
 
 ## 🚀 The Challenge
 

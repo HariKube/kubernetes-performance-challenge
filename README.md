@@ -1,6 +1,6 @@
 # The Kubernetes Performance Challenge, Join to the contest!
 
-We were interested in how far we can go with Kubernetes. While it can scale up applications to the space (beyond the clouds 😜), Kubernetes itself fails to scale gracefully. Or maybe do?
+We were interested in how far we can go with Kubernetes. While it can scale up applications to the space (beyond the clouds 😜), Kubernetes itself fails to scale gracefully. Or maybe not?
 
 **Think we're exaggerating? Prove us wrong!**
 

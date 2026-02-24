@@ -1,4 +1,4 @@
-# The Kubernetes Performance Challenge
+# The Kubernetes Performance Challenge, Join to the contest!
 
 This repository contains the benchmarking framework and entry point for the Kubernetes performance challenge. The objective is to evaluate the efficiency and throughput of Kubernetes under high-concurrency workloads.
 
@@ -8,7 +8,7 @@ We were interested in how far we can go with Kubernetes. While it can scale up a
 
 ## 🚀 The Challenge
 
-Participants are invited to execute standardized performance tests against the Kubernetes to measure latency, object reconciliation speed, and system stability.
+Participants are invited to execute standardized performance tests against the Kubernetes to measure latency, throughput, and system stability.
 
 > Participation is free and requires no purchase.
 

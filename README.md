@@ -1,7 +1,5 @@
 # The Kubernetes Performance Challenge, Join to the contest!
 
-This repository contains the benchmarking framework and entry point for the Kubernetes performance challenge. The objective is to evaluate the efficiency and throughput of Kubernetes under high-concurrency workloads.
-
 We were interested in how far we can go with Kubernetes. While it can scale up applications to the space (beyond the clouds 😜), Kubernetes itself fails to scale gracefully. Or maybe do?
 
 **Think we're exaggerating? Prove us wrong!**

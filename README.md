@@ -92,7 +92,14 @@ Don't be discouraged if you missed the first ten or couldn't beat our score. At 
     http_reqs......................: 429180 119.106435/s
 ```
     
-## Are you interested in how we did it?
+### ❓ Are you interested in how we did it?
 
 If we can dominate the leaderboard from a laptop, imagine the stability and raw power we can unleash on your datacenter.
 [Technical Details](https://harikube.info/features/performance/)
+
+## 🙏 Share Feedback and Report Issues
+
+If you encounter any issues, have a suggestion, or simply want to share your experience, we want to hear from you!
+
+- Report Bugs: If you find a bug, please open a [GitHub Issue](https://github.com/HariKube/kubernetes-performance-challenge/issues). Include as much detail as possible, such as steps to reproduce the bug, expected behavior, and your environment (e.g., Kubernetes version).
+- Discussions: For general questions or discussions, please use the [GitHub Discussions](https://github.com/HariKube/kubernetes-performance-challenge/discussions).

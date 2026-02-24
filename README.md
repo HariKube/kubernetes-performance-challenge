@@ -35,7 +35,7 @@ To ensure valid and comparable results, all participants must adhere to the foll
 
 ### 🛠️ Getting Started
 
- - **Deployment**: Bring your own Kubernetes, any customization is allowed which doesn't break the rules 👆.
+ - **Deployment**: Bring your own Kubernetes.
  - **Benchmarking**: Execute our k6 test against on your cluster.
  - **Create a PR**: Share your results via Pull-Request on the challenge repository (check example PR).
 

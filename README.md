@@ -6,16 +6,35 @@ We were interested in how far we can go with Kubernetes. While it can scale up a
 
 Think we're exaggerating? Prove us wrong!
 
-## 📅 Contest Period
-
- - Starts at 2026.02.25. 18:00 GMT
- - Ends at 2026.05.25. 22:00 GMT
-   
 ## 🚀 The Challenge
 
 Participants are invited to execute standardized performance tests against the Kubernetes to measure latency, object reconciliation speed, and system stability.
 
 > Participation is free and requires no purchase.
+
+# 🏆 The Grand Prize
+
+The ultimate reward for pushing the boundaries of cloud engineering.
+
+Every participant who achieves a higher score than ours will receive a custom-manufactured, limited-edition technical shirt.
+
+The Design:
+ - Front: Kubernetes Performance Challenge
+ - Back: I BEAT HARIKUBE
+ - Sleeve: Your specific performance metrics (like number of objects, latencies, and success rate) printed as a permanent record of your achievement.
+
+## 🎖️ The "First Ten" Grant
+
+The first 10 participants to submit a valid benchmark report (regardless of their final ranking) will receive a exclusive one-year HariKube [Pro Edition](https://harikube.info/editions/) License.
+
+## 🎲 The "Second Chance" Draw
+
+Don't be discouraged if you missed the first ten or couldn't beat our score. At the conclusion of the challenge, one additional HariKube [Pro Edition](https://harikube.info/editions/) License will be raffled off among all participants who submitted a valid report but haven't won through the other categories.
+
+### 📅 Contest Period
+
+ - Starts at 2026.02.25. 18:00 GMT
+ - Ends at 2026.05.25. 22:00 GMT
 
 ### Score calculation
 
@@ -46,31 +65,12 @@ To ensure valid and comparable results, all participants must adhere to the foll
  - **Benchmarking**: Execute our [k6 test](/k6_custom_resource_6%20read_write.js) against on your cluster.
  - **Create a PR**: Share your results via Pull-Request on the challenge repository (check example PR).
 
-### 🔥 Benchmark Details
+### 🕵️ Benchmark Details
 
  - The test execution is 1 hour
  - Define concurrency on your own taste
  - Each iteration creates 6 different type of custom resources in parallel
  - Each iteration reads beck the created custom resources via label selector in parallel
-
-## 🏆 The Grand Prize
-
-The ultimate reward for pushing the boundaries of cloud engineering.
-
-Every participant who achieves a higher score than our's will receive a custom-manufactured, limited-edition technical shirt.
-
-The Design:
- - Front: Kubernetes Performance Challenge
- - Back: I BEAT HARIKUBE
- - Sleeve: Your specific performance metrics (like number of objects, latencies, and success rate) printed as a permanent record of your achievement.
-
-## 🎖️ The "First Ten" Grant
-
-The first 10 participants to submit a valid benchmark report (regardless of their final ranking) will receive a exclusive one-year HariKube [Pro Edition](https://harikube.info/editions/) Edition License.
-
-## 🎲 The "Second Chance" Draw
-
-Don't be discouraged if you missed the first ten or couldn't beat our score. At the conclusion of the challenge, one additional HariKube [Pro Edition](https://harikube.info/editions/) License will be raffled off among all participants who submitted a valid report but haven't won through the other categories.
 
 # ⚡ Current Leaderboard
 

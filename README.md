@@ -43,7 +43,7 @@ To ensure valid and comparable results, all participants must adhere to the foll
 ### 🛠️ Getting Started
 
  - **Deployment**: Bring your own Kubernetes.
- - **Benchmarking**: Execute our k6 test against on your cluster.
+ - **Benchmarking**: Execute our [k6 test](/k6_custom_resource_6%20read_write.js) against on your cluster.
  - **Create a PR**: Share your results via Pull-Request on the challenge repository (check example PR).
 
 ### 🔥 Benchmark Details

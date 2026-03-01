@@ -46,7 +46,7 @@ To ensure valid and comparable results, all participants must adhere to the foll
 
  - **Discussion Protocol**: Upon completion of the challenge, all winners (who beat our score) will be invited to a friendly discussion regarding the results, architectural insights, and the underlying optimization strategies. This ensures a high-level technical exchange within a vetted peer group.
  - **RBAC Policy Enforcement**: Role-Based Access Control must remain enabled and fully functional. Performance gains achieved by bypassing security layers are disqualified.
- - **Feature Parity**: All core Kubernetes features, including AMission Controllers and standard API validation, must be active. No "stripping" of the environment is permitted.
+ - **Feature Parity**: All core Kubernetes features, including Admission Controllers and standard API validation, must be active. No "stripping" of the environment is permitted.
  - **No Shortcuts**: Any modification to the core that compromises data consistency will result in an invalid run.
  - **Zero Tolerance for Instability**: Database or Kubernetes crash lead to immediate disqualification.
 

@@ -71,7 +71,7 @@ function postRequest(url, payload, created) {
 
 function getRequest(kind, version, name) {
   return new Promise((resolve, reject) => {
-    const url = `${__ENV.API_ENDPOINT}apis/compute.gcp.crossplane.io/${version}/${kind}?labelSelector=name=${name}`;
+    const url = `${__ENV.API_ENDPOINT}/apis/compute.gcp.crossplane.io/${version}/${kind}?labelSelector=name=${name}`;
     const res = http.get(url);
     let checkRes = check(res, {
       'Status is 200': (r) => r.status === 200,
@@ -103,7 +103,7 @@ function createAddress(name, created) {
     }
   };
 
-  return postRequest(`${__ENV.API_ENDPOINT}apis/compute.gcp.crossplane.io/v1beta1/addresses`, payload, created);
+  return postRequest(`${__ENV.API_ENDPOINT}/apis/compute.gcp.crossplane.io/v1beta1/addresses`, payload, created);
 }
 
 function createFirewall(name, created) {
@@ -140,7 +140,7 @@ function createFirewall(name, created) {
     }
   };
 
-  return postRequest(`${__ENV.API_ENDPOINT}apis/compute.gcp.crossplane.io/v1alpha1/firewalls`, payload, created);
+  return postRequest(`${__ENV.API_ENDPOINT}/apis/compute.gcp.crossplane.io/v1alpha1/firewalls`, payload, created);
 }
 
 function createGlobalAddress(name, created) {
@@ -161,7 +161,7 @@ function createGlobalAddress(name, created) {
     }
   };
 
-  return postRequest(`${__ENV.API_ENDPOINT}apis/compute.gcp.crossplane.io/v1beta1/globaladdresses`, payload, created);
+  return postRequest(`${__ENV.API_ENDPOINT}/apis/compute.gcp.crossplane.io/v1beta1/globaladdresses`, payload, created);
 }
 
 function createNetwork(name, created) {
@@ -184,7 +184,7 @@ function createNetwork(name, created) {
     }
   };
 
-  return postRequest(`${__ENV.API_ENDPOINT}apis/compute.gcp.crossplane.io/v1beta1/networks`, payload, created);
+  return postRequest(`${__ENV.API_ENDPOINT}/apis/compute.gcp.crossplane.io/v1beta1/networks`, payload, created);
 }
 
 function createRouter(name, created) {
@@ -216,7 +216,7 @@ function createRouter(name, created) {
     }
   };
 
-  return postRequest(`${__ENV.API_ENDPOINT}apis/compute.gcp.crossplane.io/v1alpha1/routers`, payload, created);
+  return postRequest(`${__ENV.API_ENDPOINT}/apis/compute.gcp.crossplane.io/v1alpha1/routers`, payload, created);
 }
 
 function createSubNetwork(name, created) {
@@ -251,5 +251,5 @@ function createSubNetwork(name, created) {
     }
   };
 
-  return postRequest(`${__ENV.API_ENDPOINT}apis/compute.gcp.crossplane.io/v1beta1/subnetworks`, payload, created);
+  return postRequest(`${__ENV.API_ENDPOINT}/apis/compute.gcp.crossplane.io/v1beta1/subnetworks`, payload, created);
 }

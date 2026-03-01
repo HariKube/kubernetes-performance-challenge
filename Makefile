@@ -39,7 +39,7 @@ _prepare:
 	@mkdir -p results/$(K6_NAME)
 
 start: _prepare _crds-apply
-	@API_ENDPOINT=$(API_ENDPOINT) \
+	@API_ENDPOINT=$(shell echo "$(API_ENDPOINT)" | sed 's:/*$$::') \
 	USER_CRT=$(USER_CRT) \
 	USER_KEY=$(USER_KEY) \
 	k6 run \
@@ -53,7 +53,7 @@ start: _prepare _crds-apply
 		k6_custom_resource_6_read_write.js
 
 start-devbox: _prepare _crds-apply
-	@API_ENDPOINT=$(API_ENDPOINT) \
+	@API_ENDPOINT=$(shell echo "$(API_ENDPOINT)" | sed 's:/*$$::') \
 	USER_CRT=$(USER_CRT) \
 	USER_KEY=$(USER_KEY) \
 	devbox run k6 run \
@@ -71,7 +71,7 @@ start-docker: _prepare _crds-apply
 	@docker run --rm -it --name k6s-test \
 		--net=host \
 		-v $(MAKEFILE_DIR):/ws \
-		-e API_ENDPOINT=$(API_ENDPOINT) \
+		-e API_ENDPOINT=$(shell echo "$(API_ENDPOINT)" | sed 's:/*$$::') \
 		-e USER_CRT=$(USER_CRT) \
 		-e USER_KEY=$(USER_KEY) \
 		-u $$(id -u):$$(id -g) \

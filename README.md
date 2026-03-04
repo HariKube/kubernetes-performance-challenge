@@ -80,7 +80,7 @@ To ensure valid and comparable results, all participants must adhere to the foll
 
 | score | participant | checks_total | checks_succeeded | http_reqs/s | http_req_duration.avg | specs |
 | - | - | - | - | - | - | - |
-| **1059*** | [HariKube](https://github.com/orgs/HariKube) | 429180 | 100.00% | 119.106435/s | 167.17ms | 1x Ultra 7 165H 18 Core 4GB |
+| **1059*** | [mhmxs](https://github.com/mhmxs) | 429180 | 100.00% | 119.106435/s | 167.17ms | 1x Ultra 7 165H 18 Core 4GB |
 
 > \* Target Score To Beat
 
@@ -102,11 +102,6 @@ http_req_duration..............: avg=167.17ms min=7.75ms   med=71.06ms max=3.71s
 http_req_failed................: 0.00%  0 out of 429180
 http_reqs......................: 429180 119.106435/s
 ```
-    
-### ❓ Are you interested in how we did it?
-
-Imagine the stability and raw power we can unleash on your datacenter.
-[Technical Details](https://harikube.info/features/performance/)
 
 ## 🙏 Share Feedback and Report Issues
 

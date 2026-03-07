@@ -31,7 +31,6 @@ Don't be discouraged if you missed the first ten or couldn't beat our score. At 
 
 ### 📅 Contest Period
 
- - Starts at 2026.02.25. 18:00 GMT
  - Ends at 2026.05.25. 22:00 GMT
 
 ### Score calculation

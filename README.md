@@ -80,26 +80,25 @@ To ensure valid and comparable results, all participants must adhere to the foll
 | score | participant | checks_total | checks_succeeded | http_reqs/s | http_req_duration.avg | specs |
 | - | - | - | - | - | - | - |
 | **1059*** | [mhmxs](https://github.com/mhmxs) | 429180 | 100.00% | 119.106435/s | 167.17ms | 1x Ultra 7 165H 18 Core 4GB |
+| **7589*** | [daaain](https://github.com/daaain) | 1160484 | 100.00% | 322.161925/s | 61.7ms | Macbook Pro M2 Max (Colima) |
 
 > \* Target Score To Beat
 
 ## Leader Benchmark Details
 
-> Initial baseline set on a Laptop; awaiting a challenge to scale up, give me reason to bring my beasts!
-
-```
-checks_total.......: 429180  119.106435/s
-checks_succeeded...: 100.00% 429180 out of 429180
-checks_failed......: 0.00%   0 out of 429180
+```text
+checks_total.......: 1160484 322.161925/s
+checks_succeeded...: 100.00% 1160484 out of 1160484
+checks_failed......: 0.00%   0 out of 1160484
 
 ✓ Status is 201
 ✓ Status is 200
 
 HTTP
-http_req_duration..............: avg=167.17ms min=7.75ms   med=71.06ms max=3.71s  p(90)=398ms p(95)=543.76ms
-  { expected_response:true }...: avg=167.17ms min=7.75ms   med=71.06ms max=3.71s  p(90)=398ms p(95)=543.76ms
-http_req_failed................: 0.00%  0 out of 429180
-http_reqs......................: 429180 119.106435/s
+http_req_duration..............: avg=61.7ms   min=1.07ms  med=34.07ms  max=5.29s p(90)=148.64ms p(95)=202.99ms
+  { expected_response:true }...: avg=61.7ms   min=1.07ms  med=34.07ms  max=5.29s p(90)=148.64ms p(95)=202.99ms
+http_req_failed................: 0.00%   0 out of 1160484
+http_reqs......................: 1160484 322.161925/s
 ```
 
 ## 🙏 Share Feedback and Report Issues

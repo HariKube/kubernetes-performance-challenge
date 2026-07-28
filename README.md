@@ -31,7 +31,7 @@ Don't be discouraged if you missed the first ten or couldn't beat our score. At 
 
 ### 📅 Contest Period
 
- - Ends at 2026.05.25. 22:00 GMT
+ - TBD
 
 ### Score calculation
 
@@ -48,6 +48,7 @@ To ensure valid and comparable results, all participants must adhere to the foll
  - **Feature Parity**: All core Kubernetes features, including Admission Controllers and standard API validation, must be active. No "stripping" of the environment is permitted.
  - **No Shortcuts**: Any modification to the core that compromises data consistency will result in an invalid run.
  - **Zero Tolerance for Instability**: Database or Kubernetes crash lead to immediate disqualification.
+ - Clean restart without helper scripts
 
 > **Integrity & Honor**: We are aware that benchmarks can be manipulated, and no amount of technical restriction can fully prevent dedicated cheating. However, this challenge is a matter of professional honor. We are not fools - any discrepancies will immediately surface during the discussion. Let’s not ruin the collective experience for 15 minutes of fame; if you can’t beat the baseline honestly, use the opportunity to learn how to improve.
 

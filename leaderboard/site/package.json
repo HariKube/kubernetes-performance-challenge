@@ -4,7 +4,7 @@
   "private": true,
   "license": "BSD-3-Clause",
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   },
   "scripts": {
     "data": "npm --prefix .. run build-data",
@@ -18,7 +18,7 @@
     "react-dom": "^19.3.1"
   },
   "devDependencies": {
-    "@types/node": "^20.19.43",
+    "@types/node": "^22.20.5",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "typescript": "^7.0.2"

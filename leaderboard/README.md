@@ -5,7 +5,7 @@ Everything is generated from the files in [`results/`](../results); there is no 
 
 ```
 leaderboard/
-├── src/                 scoring library + CLI (TypeScript, Node 20+)
+├── src/                 scoring library + CLI (TypeScript, Node 22+)
 │   ├── score.ts         official score formula
 │   ├── parse.ts         k6 summary schema (zod), filename + raw data file rules
 │   ├── meta.ts          optional results/<user>/meta.json

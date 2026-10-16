@@ -1,0 +1,90 @@
+# Posts (or updates) the leaderboard comment on a PR.
+#
+# SECURITY: this workflow runs with a write token, so it must NEVER check out
+# or execute code from the PR. It only reads the text artifact uploaded by
+# "Leaderboard PR check" and treats everything in it as untrusted.
+# (Fork PRs cannot comment with the pull_request token, and pull_request_target
+# with a PR checkout would be unsafe.) workflow_run only runs from the
+# default branch, so this takes effect once merged to main.
+name: Leaderboard PR comment
+
+on:
+  workflow_run:
+    workflows: ["Leaderboard PR check"]
+    types: [completed]
+
+permissions:
+  pull-requests: write
+  actions: read
+
+jobs:
+  comment:
+    if: >-
+      github.event.workflow_run.event == 'pull_request' &&
+      (github.event.workflow_run.conclusion == 'success' || github.event.workflow_run.conclusion == 'failure')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Download report artifact
+        id: download
+        # The artifact is missing when the PR changed no *_sum.json; nothing to post then.
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          name: leaderboard-report
+          path: ${{ runner.temp }}/report
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ github.token }}
+
+      - name: Post or update comment
+        if: steps.download.outcome == 'success'
+        uses: actions/github-script@v7
+        env:
+          REPORT_DIR: ${{ runner.temp }}/report
+          RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          RUN_HEAD_REPO: ${{ github.event.workflow_run.head_repository.full_name }}
+        with:
+          script: |
+            const fs = require("fs");
+            const path = require("path");
+            const MARKER = "<!-- leaderboard-bot -->";
+            const MAX_LENGTH = 60000;
+            const dir = process.env.REPORT_DIR;
+
+            // Untrusted: the PR number must be a plain positive integer.
+            const rawNumber = fs.readFileSync(path.join(dir, "pr-number"), "utf8").trim();
+            if (!/^[1-9][0-9]{0,9}$/.test(rawNumber)) {
+              core.setFailed("Artifact contains an invalid PR number; not commenting.");
+              return;
+            }
+            const issue_number = Number(rawNumber);
+            const { owner, repo } = context.repo;
+
+            // The PR must be the one this workflow run was for.
+            const { data: pr } = await github.rest.pulls.get({ owner, repo, pull_number: issue_number });
+            if (pr.head.sha !== process.env.RUN_HEAD_SHA || pr.head.repo?.full_name !== process.env.RUN_HEAD_REPO) {
+              core.notice(`PR #${issue_number} head does not match this run (new commits pushed?); skipping comment.`);
+              return;
+            }
+
+            const commentFile = path.join(dir, "comment.md");
+            if (!fs.existsSync(commentFile)) {
+              core.notice("No comment.md in the artifact (the check failed before writing it); nothing to post.");
+              return;
+            }
+
+            // Untrusted text: strip our marker, neutralise @mentions, cap the size.
+            let body = fs.readFileSync(commentFile, "utf8");
+            body = body.split(MARKER).join("").replace(/@(?=[A-Za-z0-9])/g, "@​");
+            if (body.length > MAX_LENGTH) body = body.slice(0, MAX_LENGTH) + "\n\n…(truncated)";
+            body = `${MARKER}\n${body.trim()}\n`;
+
+            const comments = await github.paginate(github.rest.issues.listComments, { owner, repo, issue_number, per_page: 100 });
+            const existing = comments.find((c) => c.user?.login === "github-actions[bot]" && c.body?.includes(MARKER));
+            if (existing) {
+              await github.rest.issues.updateComment({ owner, repo, comment_id: existing.id, body });
+              core.info(`Updated comment ${existing.id} on PR #${issue_number}`);
+            } else {
+              const { data } = await github.rest.issues.createComment({ owner, repo, issue_number, body });
+              core.info(`Created comment ${data.id} on PR #${issue_number}`);
+            }

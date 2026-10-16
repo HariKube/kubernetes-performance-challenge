@@ -1,0 +1,21 @@
+.intro p {
+  margin: 0 0 0.75rem;
+}
+
+.toBeat {
+  display: inline-block;
+  margin-top: 0.5rem !important;
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--radius);
+  background: var(--highlight-bg);
+  border: 1px solid var(--highlight-border);
+}
+
+.cta {
+  margin-top: 1.5rem;
+  max-width: 640px;
+}
+
+.cta h3 {
+  margin-top: 0;
+}

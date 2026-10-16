@@ -10,3 +10,8 @@
   margin: 0.4rem 0 0;
   white-space: pre-wrap;
 }
+
+.formula {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}

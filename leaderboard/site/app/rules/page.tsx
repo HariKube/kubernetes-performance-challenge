@@ -123,7 +123,7 @@ export default function RulesPage() {
       </ul>
 
       <h2 id="score">Score calculation</h2>
-      <pre>
+      <pre className={styles.formula}>
         <code>
           {"floor(checks_total / (http_req_duration.med*0.2 + http_req_duration.p90*0.3 + http_req_duration.p95*0.5) * pow(1 - checks_failed / checks_total, 7))"}
         </code>

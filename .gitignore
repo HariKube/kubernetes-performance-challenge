@@ -1,2 +1,10 @@
 .devbox/
 provider-gcp/
+# leaderboard
+leaderboard/node_modules/
+leaderboard/site/node_modules/
+leaderboard/site/.next/
+leaderboard/site/out/
+leaderboard/site/next-env.d.ts
+leaderboard/site/public/leaderboard.json
+*.tsbuildinfo

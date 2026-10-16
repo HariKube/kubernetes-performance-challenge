@@ -1,0 +1,26 @@
+{
+  "participant": "mhmxs",
+  "github": "mhmxs",
+  "source": "README (raw file pending)",
+  "official_score": 1059,
+  "timestamp": 1771941557,
+  "date": "2026-02-24T13:59:17Z",
+  "vus": 20,
+  "specs": "1x Ultra 7 165H 18 Core 4GB",
+  "notes": "Initial baseline set on a Laptop; awaiting a challenge to scale up, give me reason to bring my beasts!",
+  "metrics": {
+    "checks_total": 429180,
+    "checks_failed": 0,
+    "http_reqs_count": 429180,
+    "http_reqs_rate": 119.106435,
+    "http_req_failed_rate": 0,
+    "http_req_duration": {
+      "avg": 167.17,
+      "min": 7.75,
+      "med": 71.06,
+      "max": 3710,
+      "p90": 398,
+      "p95": 543.76
+    }
+  }
+}

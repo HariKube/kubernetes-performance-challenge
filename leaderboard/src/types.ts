@@ -52,12 +52,9 @@ export interface Run {
   date: string;
   /** Virtual users, from the filename. */
   vus: number;
-  /** "results" = a real *_sum.json, "seed" = leaderboard/data/baseline.json. */
-  source: "results" | "seed";
-  /** Shown on the run page, e.g. "baseline from README, raw data pending". */
-  sourceNote: string | null;
-  summaryFile: FileLink | null;
+  summaryFile: FileLink;
   rawFiles: FileLink[];
+  /** Run of the baseline participant from leaderboard/config.json. */
   isBaseline: boolean;
 }
 

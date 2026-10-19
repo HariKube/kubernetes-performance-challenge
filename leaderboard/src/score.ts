@@ -1,5 +1,5 @@
 /**
- * Official score formula (http_req_duration in ms):
+ * Score formula (http_req_duration in ms):
  *
  *   floor( checks_total / (med*0.2 + p90*0.3 + p95*0.5) * pow(1 - checks_failed/checks_total, 7) )
  */

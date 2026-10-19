@@ -82,7 +82,7 @@ To ensure valid and comparable results, all participants must adhere to the foll
 <!-- LEADERBOARD:START -->
 | score | participant | checks_total | checks_succeeded | http_reqs/s | http_req_duration.avg | specs |
 | - | - | - | - | - | - | - |
-| **1059*** | [mhmxs](https://github.com/mhmxs) | 429180 | 100.00% | 119.106435/s | 167.17ms | 1x Ultra 7 165H 18 Core 4GB |
+| **1058*** | [mhmxs](https://github.com/mhmxs) | 429180 | 100.00% | 119.106435/s | 167.17ms | 1x Ultra 7 165H 18 Core 4GB |
 <!-- LEADERBOARD:END -->
 
 > \* Target Score To Beat

@@ -1,7 +1,6 @@
 import { existsSync, readdirSync } from "node:fs";
 import { join } from "node:path";
-import { BASELINE_PARTICIPANT, loadRun, REPOSITORY } from "./run.js";
-import { loadSeed } from "./seed.js";
+import { loadRun, REPOSITORY } from "./run.js";
 import type { LeaderboardData, LeaderboardEntry, Run } from "./types.js";
 
 /** Lists results/<participant>/*_sum.json (one level deep, dot folders skipped). */
@@ -23,7 +22,7 @@ export function compareRuns(a: Pick<Run, "score" | "timestamp" | "participant">,
 }
 
 /** One entry per participant using their best run; ties go to the earlier submission. */
-export function rankRuns(runs: Run[]): LeaderboardEntry[] {
+export function rankRuns(runs: Run[], baselineParticipant: string | null = null): LeaderboardEntry[] {
   const byParticipant = new Map<string, Run[]>();
   for (const run of runs) {
     const list = byParticipant.get(run.participant) ?? [];
@@ -42,14 +41,14 @@ export function rankRuns(runs: Run[]): LeaderboardEntry[] {
     score: best.score,
     bestRunId: best.id,
     runIds,
-    isBaseline: best.participant === BASELINE_PARTICIPANT,
+    isBaseline: best.participant === baselineParticipant,
   }));
 }
 
 export interface BuildOptions {
   resultsDir: string;
-  /** Seed baseline used when results/<baseline>/ has no valid *_sum.json. */
-  seedFile?: string;
+  /** Participant whose best run is the "score to beat" (from leaderboard/config.json). */
+  baselineParticipant?: string | null;
   now?: Date;
 }
 
@@ -59,7 +58,7 @@ export interface BuildResult {
   errors: string[];
 }
 
-export function buildLeaderboard({ resultsDir, seedFile, now = new Date() }: BuildOptions): BuildResult {
+export function buildLeaderboard({ resultsDir, baselineParticipant = null, now = new Date() }: BuildOptions): BuildResult {
   const runs: Run[] = [];
   const errors: string[] = [];
   const warnings = new Set<string>();
@@ -68,12 +67,7 @@ export function buildLeaderboard({ resultsDir, seedFile, now = new Date() }: Bui
     const result = loadRun(file);
     result.warnings.forEach((w) => warnings.add(w));
     errors.push(...result.errors);
-    if (result.run) runs.push(result.run);
-  }
-
-  // A real baseline file always wins; the seed is only a placeholder.
-  if (seedFile && !runs.some((r) => r.participant === BASELINE_PARTICIPANT)) {
-    runs.push(loadSeed(seedFile));
+    if (result.run) runs.push({ ...result.run, isBaseline: result.run.participant === baselineParticipant });
   }
 
   // Ids are "<slug>-<ts>-<vus>"; two folders can slug to the same value.
@@ -84,7 +78,7 @@ export function buildLeaderboard({ resultsDir, seedFile, now = new Date() }: Bui
     if (n > 0) run.id = `${run.id}-${n + 1}`;
   }
 
-  const entries = rankRuns(runs);
+  const entries = rankRuns(runs, baselineParticipant);
   const runsById = new Map(runs.map((r) => [r.id, r]));
   const baselineEntry = entries.find((e) => e.isBaseline);
   const missingSpecs = entries

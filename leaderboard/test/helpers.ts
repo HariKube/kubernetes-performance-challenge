@@ -1,6 +1,7 @@
-import { mkdirSync, mkdtempSync, writeFileSync } from "node:fs";
+import { mkdirSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+import { loadConfig } from "../src/config.js";
 
 export interface SummaryOptions {
   passes?: number;
@@ -78,5 +79,24 @@ export function addMeta(resultsDir: string, participant: string, meta: unknown) 
   writeFileSync(join(dir, "meta.json"), typeof meta === "string" ? meta : JSON.stringify(meta));
 }
 
-export const SEED_FILE = join(import.meta.dirname, "..", "data", "baseline.json");
-export const FIXTURE_PR2 = join(import.meta.dirname, "fixtures", "sample-pr2_sum.json");
+const FIXTURES = join(import.meta.dirname, "fixtures");
+export const FIXTURE_PR2 = join(FIXTURES, "sample-pr2_sum.json");
+export const FIXTURE_CONFIG = join(FIXTURES, "config.json");
+export const FIXTURE_META = join(FIXTURES, "meta.json");
+/** The repository's own leaderboard/config.json. */
+export const REPO_CONFIG = join(import.meta.dirname, "..", "config.json");
+export const REPO_RESULTS = join(import.meta.dirname, "..", "..", "results");
+
+export const readJson = (file: string) => JSON.parse(readFileSync(file, "utf8"));
+
+/**
+ * results/ with the fixture config's baseline participant: the PR #2 format sample
+ * as its run and the fixture meta.json. Returns the dir and that participant.
+ */
+export function makeFixtureResults(): { results: string; baseline: string } {
+  const results = makeResultsDir();
+  const { baselineParticipant } = loadConfig(FIXTURE_CONFIG);
+  addRun(results, baselineParticipant, 1770000000, 20, readFileSync(FIXTURE_PR2, "utf8"));
+  addMeta(results, baselineParticipant, readFileSync(FIXTURE_META, "utf8"));
+  return { results, baseline: baselineParticipant };
+}

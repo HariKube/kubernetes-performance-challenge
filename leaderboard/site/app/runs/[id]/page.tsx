@@ -71,12 +71,6 @@ export default async function RunPage({ params }: Props) {
         </div>
       </header>
 
-      {run.sourceNote && (
-        <p className={`callout ${styles.note}`} role="note">
-          Note: {run.sourceNote}.
-        </p>
-      )}
-
       {entry && (
         <p>
           {isBest ? (
@@ -152,20 +146,16 @@ export default async function RunPage({ params }: Props) {
 
       <section aria-labelledby="files">
         <h2 id="files">Files</h2>
-        {run.summaryFile ? (
-          <ul>
-            <li>
-              Summary (used for scoring): <a href={run.summaryFile.url}>{run.summaryFile.path}</a>
+        <ul>
+          <li>
+            Summary (used for scoring): <a href={run.summaryFile.url}>{run.summaryFile.path}</a>
+          </li>
+          {run.rawFiles.map((f) => (
+            <li key={f.path}>
+              Raw benchmark data: <a href={f.url}>{f.path}</a>
             </li>
-            {run.rawFiles.map((f) => (
-              <li key={f.path}>
-                Raw benchmark data: <a href={f.url}>{f.path}</a>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className="muted">Raw data pending: the k6 summary for this run has not been added to results/ yet.</p>
-        )}
+          ))}
+        </ul>
       </section>
 
       {otherRuns.length > 0 && (

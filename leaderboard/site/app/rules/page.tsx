@@ -19,7 +19,6 @@ function WorkedExample({ run }: { run: Run }) {
   const w = LATENCY_WEIGHTS;
   const result = computeScore({ checksTotal: m.checksTotal, checksFailed: m.checksFailed, med: d.med, p90: d.p90, p95: d.p95 });
   if (!result.valid) return null;
-  const fromSeed = run.source === "seed";
 
   return (
     <>
@@ -37,9 +36,7 @@ function WorkedExample({ run }: { run: Run }) {
           <strong>Throughput per latency</strong>:
           <pre>
             <code>
-              {fromSeed
-                ? `checks_total / weighted latency = ${m.checksTotal} / ${n(result.latencyDenominator)}`
-                : `checks_total / weighted latency = ${m.checksTotal} / ${n(result.latencyDenominator)} = ${n(m.checksTotal / result.latencyDenominator)}`}
+              {`checks_total / weighted latency = ${m.checksTotal} / ${n(result.latencyDenominator)} = ${n(m.checksTotal / result.latencyDenominator)}`}
             </code>
           </pre>
         </li>
@@ -50,25 +47,9 @@ function WorkedExample({ run }: { run: Run }) {
           </pre>
         </li>
         <li>
-          <strong>Multiply and round down</strong>:{" "}
-          {fromSeed ? (
-            <>
-              official score <strong>{run.score}</strong>.
-            </>
-          ) : (
-            <>
-              floor({n(result.raw)}) = <strong>{result.score}</strong>.
-            </>
-          )}
+          <strong>Multiply and round down</strong>: floor({n(result.raw)}) = <strong>{result.score}</strong>.
         </li>
       </ol>
-      {fromSeed && (
-        <p className="callout">
-          The baseline latencies above are the values shown in the README, rounded to two decimals. The official score of{" "}
-          {run.score} was calculated from the unrounded values in the k6 summary file, so recalculating from the rounded
-          numbers lands a fraction lower. The raw summary file will be added to the repository later.
-        </p>
-      )}
     </>
   );
 }

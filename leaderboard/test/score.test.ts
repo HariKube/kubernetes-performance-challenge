@@ -5,21 +5,6 @@ import { computeScore } from "../src/score.js";
 import { FIXTURE_PR2 } from "./helpers.js";
 
 describe("computeScore", () => {
-  it("README baseline values give 1058 (official score is 1059)", () => {
-    // The README shows the baseline latencies rounded to two decimals
-    // (med 71.06, p90 398, p95 543.76). Those give 429180 / 405.492 = 1058.42.
-    // The official 1059 was computed from the unrounded values in the real
-    // results/mhmxs/*_sum.json, which is not in the repository yet. Until it is,
-    // the site shows the official score from leaderboard/data/baseline.json.
-    // TODO: when the real file arrives, add a test expecting 1059 from it.
-    const result = computeScore({ checksTotal: 429180, checksFailed: 0, med: 71.06, p90: 398, p95: 543.76 });
-    expect(result.valid).toBe(true);
-    if (result.valid) {
-      expect(result.score).toBe(1058);
-      expect(result.latencyDenominator).toBeCloseTo(405.492, 6);
-    }
-  });
-
   it("scores the PR #2 format sample as 7589", () => {
     const parsed = parseSummaryText(readFileSync(FIXTURE_PR2, "utf8"));
     if (!parsed.ok) throw new Error(parsed.errors.join("\n"));

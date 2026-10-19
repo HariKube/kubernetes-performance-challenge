@@ -6,16 +6,16 @@ Everything is generated from the files in [`results/`](../results); there is no 
 ```
 leaderboard/
 ├── src/                 scoring library + CLI (TypeScript, Node 22+)
-│   ├── score.ts         official score formula
+│   ├── score.ts         score formula
 │   ├── parse.ts         k6 summary schema (zod), filename + raw data file rules
 │   ├── meta.ts          optional results/<user>/meta.json
 │   ├── run.ts           load + validate one *_sum.json
-│   ├── seed.ts          baseline seed (see "Baseline" below)
+│   ├── config.ts        leaderboard/config.json (baseline participant)
 │   ├── build-data.ts    leaderboard.json: ranking, best run per participant
 │   ├── pr-report.ts     PR comment markdown + would-be rank
 │   ├── readme.ts        README "Current Leaderboard" block
 │   └── cli.ts           npm scripts
-├── data/baseline.json   baseline seed from the README
+├── config.json          { "baselineParticipant": "<results folder>" }
 ├── test/                vitest unit tests (+ fixtures/)
 └── site/                Next.js static site (separate package)
 ```
@@ -44,16 +44,14 @@ Optional `results/<participant>/meta.json`:
 
 ### Baseline
 
-The baseline (`mhmxs`, "score to beat") currently comes from [`data/baseline.json`](data/baseline.json), which
-holds the README values and the official score **1059**, because the raw `results/mhmxs/*_sum.json` is not in the
-repository yet. The README latencies are rounded to two decimals and would compute to 1058, so the seed's official
-score is shown as is, with the note "baseline from README, raw data pending" on its run page.
+The "score to beat" is the best run of the participant named in [`config.json`](config.json)
+(`baselineParticipant`). It is scored like every other submission; no score is hard-coded anywhere. The site,
+the PR comment, the README table and the worked example on the rules page all take it from the generated data.
 
-As soon as a real `results/mhmxs/*_sum.json` exists, the seed is ignored completely. When adding it:
-
-1. Add the summary and raw data file under `results/mhmxs/`, plus `results/mhmxs/meta.json` with
-   `{ "specs": "1x Ultra 7 165H 18 Core 4GB" }` (specs are not part of the k6 output).
-2. Add a test expecting 1059 from the real file (see the TODO in `test/score.test.ts`).
+The files in `results/mhmxs/` are currently a hand-crafted placeholder: `1771941557_20_sum.json` uses the
+k6 summary-export structure with the values shown in the README (latencies rounded to two decimals), and
+`1771941557_20.json` stands in for the raw data. The maintainer will replace them with the original benchmark files;
+the leaderboard picks up the new score automatically.
 
 ## Run locally
 

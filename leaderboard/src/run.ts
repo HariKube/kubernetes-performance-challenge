@@ -7,8 +7,6 @@ import type { FileLink, Run } from "./types.js";
 
 export const REPOSITORY = "HariKube/kubernetes-performance-challenge";
 export const REPO_BLOB_BASE = `https://github.com/${REPOSITORY}/blob/main`;
-/** The organisers' baseline participant ("score to beat"). */
-export const BASELINE_PARTICIPANT = "mhmxs";
 
 export function repoFileLink(repoPath: string): FileLink {
   return { path: repoPath, url: `${REPO_BLOB_BASE}/${repoPath.split("/").map(encodeURIComponent).join("/")}` };
@@ -109,11 +107,10 @@ export function loadRun(sumPath: string): LoadRunResult {
     timestamp: name.timestamp,
     date: new Date(name.timestamp * 1000).toISOString(),
     vus: name.vus,
-    source: "results",
-    sourceNote: null,
     summaryFile: repoFileLink(repoPath),
     rawFiles: rawFiles.map((f) => repoFileLink(`results/${participant}/${f}`)),
-    isBaseline: participant === BASELINE_PARTICIPANT,
+    // Set by buildLeaderboard from leaderboard/config.json.
+    isBaseline: false,
   };
   return { run, errors, warnings };
 }

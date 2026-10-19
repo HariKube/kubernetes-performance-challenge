@@ -42,10 +42,6 @@
   font-variant-numeric: tabular-nums;
 }
 
-.note {
-  max-width: 760px;
-}
-
 .metrics {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));

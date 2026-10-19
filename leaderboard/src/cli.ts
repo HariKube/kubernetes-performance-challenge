@@ -3,6 +3,7 @@ import { dirname, isAbsolute, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { parseArgs } from "node:util";
 import { buildLeaderboard } from "./build-data.js";
+import { loadConfig } from "./config.js";
 import { parseSummaryFilename, parseSummaryText } from "./parse.js";
 import { checkSubmissions, renderPrComment } from "./pr-report.js";
 import { renderReadmeTable, updateReadme } from "./readme.js";
@@ -14,7 +15,7 @@ const PKG_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const REPO_ROOT = resolve(PKG_ROOT, "..");
 const DEFAULTS = {
   results: resolve(REPO_ROOT, "results"),
-  seed: resolve(PKG_ROOT, "data/baseline.json"),
+  config: resolve(PKG_ROOT, "config.json"),
   out: resolve(PKG_ROOT, "site/public/leaderboard.json"),
   readme: resolve(REPO_ROOT, "README.md"),
 };
@@ -25,7 +26,7 @@ const userPath = (p: string) => (isAbsolute(p) ? p : resolve(process.env.INIT_CW
 
 const USAGE = `Usage:
   npm run score -- <file_sum.json>              Print score and metrics for one summary file
-  npm run build-data [-- --results <dir> --out <file> --seed <file>]
+  npm run build-data [-- --results <dir> --out <file> --config <file>]
                                                 Write leaderboard.json (default: site/public/leaderboard.json)
   npm run validate -- <files_sum.json...>       Validate submissions; exits 1 on any error
   npm run readme [-- --check]                   Regenerate the README leaderboard block
@@ -59,16 +60,17 @@ function cmdScore(args: string[]) {
   if (name) console.log(`  run ................. ${new Date(name.timestamp * 1000).toISOString()}, ${name.vus} VUs`);
 }
 
-function build(results: string, seed: string): LeaderboardData {
-  const { data, errors } = buildLeaderboard({ resultsDir: results, seedFile: seed });
+function build(results: string, config: string): LeaderboardData {
+  const { baselineParticipant } = loadConfig(config);
+  const { data, errors } = buildLeaderboard({ resultsDir: results, baselineParticipant });
   for (const e of errors) console.error(`warning: skipped invalid file: ${e}`);
   return data;
 }
 
 function cmdBuildData(args: string[]) {
-  const { values } = parseArgs({ args, options: { results: { type: "string" }, out: { type: "string" }, seed: { type: "string" } } });
+  const { values } = parseArgs({ args, options: { results: { type: "string" }, out: { type: "string" }, config: { type: "string" } } });
   const out = values.out ? userPath(values.out) : DEFAULTS.out;
-  const data = build(values.results ? userPath(values.results) : DEFAULTS.results, values.seed ? userPath(values.seed) : DEFAULTS.seed);
+  const data = build(values.results ? userPath(values.results) : DEFAULTS.results, values.config ? userPath(values.config) : DEFAULTS.config);
   mkdirSync(dirname(out), { recursive: true });
   writeFileSync(out, JSON.stringify(data, null, 2) + "\n");
   console.log(`Wrote ${out}: ${data.entries.length} participant(s), ${data.runs.length} run(s).`);
@@ -98,7 +100,7 @@ function cmdReadme(args: string[]) {
   const { values } = parseArgs({ args, options: { check: { type: "boolean" }, readme: { type: "string" } } });
   const file = values.readme ? userPath(values.readme) : DEFAULTS.readme;
   const current = readFileSync(file, "utf8");
-  const next = updateReadme(current, renderReadmeTable(build(DEFAULTS.results, DEFAULTS.seed)));
+  const next = updateReadme(current, renderReadmeTable(build(DEFAULTS.results, DEFAULTS.config)));
   if (values.check) {
     if (next !== current) fail("README leaderboard block is out of date. Run: npm run readme");
     console.log("README leaderboard block is up to date.");

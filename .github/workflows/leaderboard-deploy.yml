@@ -1,0 +1,74 @@
+# Builds leaderboard data and the static site, then publishes it to
+# kubernetes-performance-challenge/kubernetes-performance-challenge.github.io.
+# Needs the PAGES_DEPLOY_KEY secret (see leaderboard/README.md); without it the
+# site is still built but the deploy step is skipped with a notice.
+name: Leaderboard deploy
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "results/**"
+      - "leaderboard/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: leaderboard-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      HAS_DEPLOY_KEY: ${{ secrets.PAGES_DEPLOY_KEY != '' }}
+      NEXT_TELEMETRY_DISABLED: 1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            leaderboard/package-lock.json
+            leaderboard/site/package-lock.json
+
+      - name: Install, typecheck and test
+        working-directory: leaderboard
+        run: |
+          npm ci
+          npm run typecheck
+          npm test
+
+      - name: Build leaderboard data
+        working-directory: leaderboard
+        run: npm run build-data
+
+      - name: Build static site
+        working-directory: leaderboard/site
+        run: |
+          npm ci
+          npm run build
+          touch out/.nojekyll
+
+      - name: Deploy key missing
+        if: env.HAS_DEPLOY_KEY != 'true'
+        run: echo "::notice title=Deploy skipped::PAGES_DEPLOY_KEY secret is not set. The site was built but not published. See leaderboard/README.md."
+
+      - name: Publish to GitHub Pages repository
+        if: env.HAS_DEPLOY_KEY == 'true'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          deploy_key: ${{ secrets.PAGES_DEPLOY_KEY }}
+          external_repository: kubernetes-performance-challenge/kubernetes-performance-challenge.github.io
+          publish_branch: main
+          publish_dir: ./leaderboard/site/out
+          enable_jekyll: false

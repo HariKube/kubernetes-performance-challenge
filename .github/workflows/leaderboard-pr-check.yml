@@ -1,0 +1,99 @@
+# Validates submitted results and computes their score and would-be rank.
+# Runs the PR's code with a read-only token. The comment is posted by
+# leaderboard-pr-comment.yml, which only reads the artifact produced here.
+name: Leaderboard PR check
+
+on:
+  pull_request:
+    paths:
+      - "results/**"
+      - "leaderboard/**"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: leaderboard-pr-check-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          # Blobs (large raw data files) are fetched only when needed.
+          filter: blob:none
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: leaderboard/package-lock.json
+
+      - name: Install dependencies
+        working-directory: leaderboard
+        run: npm ci
+
+      - name: Typecheck and test
+        working-directory: leaderboard
+        run: |
+          npm run typecheck
+          npm test
+
+      - name: Find changed summary files
+        id: changed
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          git diff --name-only --diff-filter=AMR "$BASE_SHA" HEAD -- results/ \
+            | grep -E '_sum\.json$' > "$RUNNER_TEMP/changed.txt" || true
+          echo "count=$(wc -l < "$RUNNER_TEMP/changed.txt" | tr -d ' ')" >> "$GITHUB_OUTPUT"
+          echo "Changed summary files:"
+          cat "$RUNNER_TEMP/changed.txt"
+
+      - name: Build leaderboard data from the base branch
+        if: steps.changed.outputs.count != '0'
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          git worktree add --detach "$RUNNER_TEMP/base" "$BASE_SHA"
+          npm --prefix leaderboard run build-data -- \
+            --results "$RUNNER_TEMP/base/results" \
+            --out "$RUNNER_TEMP/base-leaderboard.json"
+
+      - name: Validate and score submissions
+        id: report
+        if: steps.changed.outputs.count != '0'
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          mkdir -p "$RUNNER_TEMP/report"
+          echo "$PR_NUMBER" > "$RUNNER_TEMP/report/pr-number"
+          set +e
+          npm --prefix leaderboard run -s pr-report -- \
+            --base "$RUNNER_TEMP/base-leaderboard.json" \
+            --files-from "$RUNNER_TEMP/changed.txt" \
+            --out "$RUNNER_TEMP/report/comment.md"
+          echo "exit=$?" >> "$GITHUB_OUTPUT"
+          cat "$RUNNER_TEMP/report/comment.md" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload report for the comment workflow
+        if: steps.report.outcome == 'success'
+        uses: actions/upload-artifact@v4
+        with:
+          name: leaderboard-report
+          path: ${{ runner.temp }}/report/
+          retention-days: 7
+          if-no-files-found: error
+
+      - name: Fail on validation errors
+        if: steps.report.outputs.exit != '' && steps.report.outputs.exit != '0'
+        run: |
+          echo "::error::Leaderboard validation failed. See the log above or the PR comment for details."
+          exit 1

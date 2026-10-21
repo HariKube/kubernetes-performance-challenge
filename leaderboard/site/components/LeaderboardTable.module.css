@@ -1,0 +1,151 @@
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.toolbar label {
+  font-weight: 600;
+}
+
+.toolbar input {
+  flex: 1 1 220px;
+  max-width: 320px;
+  font: inherit;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.4rem 0.6rem;
+}
+
+.count {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.scrollHint {
+  display: none;
+  margin: 0 0 0.5rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+@media (max-width: 900px) {
+  .scrollHint {
+    display: block;
+  }
+}
+
+.scroll {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.table {
+  width: 100%;
+  min-width: 980px;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.caption {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.table th,
+.table td {
+  padding: 0.6rem 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.table thead th {
+  background: var(--bg-subtle);
+  font-size: 0.85rem;
+  white-space: nowrap;
+  padding: 0;
+}
+
+.table tbody tr:last-child > * {
+  border-bottom: none;
+}
+
+.sortButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  font: inherit;
+  font-weight: 600;
+  color: var(--text);
+  background: none;
+  border: 0;
+  cursor: pointer;
+  text-align: inherit;
+}
+
+.num .sortButton {
+  justify-content: flex-end;
+}
+
+.sortIcon {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.num {
+  text-align: right !important;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.participant {
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.who {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.score {
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.specs {
+  min-width: 160px;
+}
+
+.date {
+  white-space: nowrap;
+}
+
+.baseline > * {
+  background: var(--highlight-bg);
+}
+
+.baseline > :first-child {
+  box-shadow: inset 4px 0 0 var(--highlight-border);
+}
+
+.empty {
+  text-align: center !important;
+  color: var(--text-muted);
+  padding: 1.5rem !important;
+}

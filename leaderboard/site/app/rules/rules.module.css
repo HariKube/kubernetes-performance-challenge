@@ -1,0 +1,17 @@
+.steps {
+  padding-left: 1.25rem;
+}
+
+.steps li {
+  margin-bottom: 0.75rem;
+}
+
+.steps pre {
+  margin: 0.4rem 0 0;
+  white-space: pre-wrap;
+}
+
+.formula {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}

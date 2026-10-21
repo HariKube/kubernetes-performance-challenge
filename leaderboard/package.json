@@ -1,0 +1,29 @@
+{
+  "name": "kpc-leaderboard",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Scoring, validation and data generation for the Kubernetes Performance Challenge leaderboard",
+  "license": "BSD-3-Clause",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "score": "tsx src/cli.ts score",
+    "build-data": "tsx src/cli.ts build-data",
+    "validate": "tsx src/cli.ts validate",
+    "readme": "tsx src/cli.ts readme",
+    "pr-report": "tsx src/cli.ts pr-report",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.5",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.5"
+  }
+}

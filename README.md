@@ -66,7 +66,8 @@ To ensure valid and comparable results, all participants must adhere to the foll
    - The data is collected under `results/${USER}` directory
    - Summary of k6 benchmark execution, example location: `results/${USER}/1771941557_20_sum.json`
    - Collected benchmark data, example location: `results/${USER}/1771941557_20.json`
-   - Updated `Current Leaderboard` in `README.md`
+   - Optional: `results/${USER}/meta.json` with your cluster specs, example: `{ "github": "<your-github-username>", "specs": "3x 16 vCPU 64GB" }`
+   - You don't need to edit the `Current Leaderboard` by hand: a bot comments your calculated score and rank on the PR, and the leaderboard at https://kubernetes-performance-challenge.github.io is updated after merge
    - If you have the highest score; update `Leader Benchmark Details` in `README.md` based on the example
 
 ### 🕵️ Benchmark Details
@@ -78,9 +79,11 @@ To ensure valid and comparable results, all participants must adhere to the foll
 
 # ⚡ Current Leaderboard
 
+<!-- LEADERBOARD:START -->
 | score | participant | checks_total | checks_succeeded | http_reqs/s | http_req_duration.avg | specs |
 | - | - | - | - | - | - | - |
-| **1059*** | [mhmxs](https://github.com/mhmxs) | 429180 | 100.00% | 119.106435/s | 167.17ms | 1x Ultra 7 165H 18 Core 4GB |
+| **1058*** | [mhmxs](https://github.com/mhmxs) | 429180 | 100.00% | 119.106435/s | 167.17ms | 1x Ultra 7 165H 18 Core 4GB |
+<!-- LEADERBOARD:END -->
 
 > \* Target Score To Beat
 

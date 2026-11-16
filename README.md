@@ -70,6 +70,23 @@ To ensure valid and comparable results, all participants must adhere to the foll
    - You don't need to edit the `Current Leaderboard` by hand: a bot comments your calculated score and rank on the PR, and the leaderboard at https://kubernetes-performance-challenge.github.io is updated after merge
    - If you have the highest score; update `Leader Benchmark Details` in `README.md` based on the example
 
+### 🧰 Alternative runner: perfscale
+
+Official submissions use the k6 test above. If you want to run the same
+workload with [perfscale](https://github.com/Perfscale/perfscale) for your
+own experiments, there is a port of `k6_custom_resource_6_read_write.js` at
+[vitalics/k8s-crd-perfscale](https://github.com/vitalics/k8s-crd-perfscale).
+It runs the same 6 creates and 6 label-selector reads per iteration, written
+as a native YAML scenario. It authenticates with a ServiceAccount token
+instead of a client certificate.
+
+```sh
+git clone https://github.com/vitalics/k8s-crd-perfscale && cd k8s-crd-perfscale
+export KUBE_CONTEXT=<your-context>
+make smoke   # 1 VU, 5s
+make start   # 10 VUs, 1h
+```
+
 ### 🕵️ Benchmark Details
 
  - The test execution is 1 hour
